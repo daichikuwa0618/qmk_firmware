@@ -29,7 +29,10 @@ enum layer_number {
 };
 
 enum custom_keycodes {
-  KC_PW = SAFE_RANGE,
+  KC_PW1 = SAFE_RANGE,
+  KC_PW2,
+  KC_ML1,
+  KC_ML2
 };
 
 #define KC_L_SPC LT(_LOWER, KC_SPC)  // lower
@@ -90,9 +93,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_ADJUST] = LAYOUT( \
     //,--------+--------+--------+--------+--------+--------.   ,--------+--------+--------+--------+--------+--------.
-       _______, _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______, _______,
+       _______, KC_ML1 , KC_ML2 , _______, _______, _______,     _______, _______, _______, _______, _______, _______,
     //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
-       _______, KC_PW  , _______, _______, _______, _______,     _______, _______, _______, _______, _______, _______,
+       _______, KC_PW1 , KC_PW2 , _______, _______, _______,     _______, _______, _______, _______, _______, _______,
     //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
        _______, _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______, _______,
     //`--------+--------+--------+--------+--------+--------/   \--------+--------+--------+--------+--------+--------'
@@ -103,10 +106,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case KC_PW:
+    case KC_PW1:
       if (record->event.pressed) {
         tap_code(KC_LANG2);
-        SEND_STRING(PASSWORD);
+        SEND_STRING(PASSWORD1);
+      }
+      return false;
+      break;
+    case KC_PW2:
+      if (record->event.pressed) {
+        tap_code(KC_LANG2);
+        SEND_STRING(PASSWORD2);
+      }
+      return false;
+      break;
+    case KC_ML1:
+      if (record->event.pressed) {
+        tap_code(KC_LANG2);
+        SEND_STRING(MAIL1);
+      }
+      return false;
+      break;
+    case KC_ML2:
+      if (record->event.pressed) {
+        tap_code(KC_LANG2);
+        SEND_STRING(MAIL2);
       }
       return false;
       break;
